@@ -20,13 +20,13 @@ const BinFiles: React.FC<BinFilesProps> = ({ searchTerm }) => {
   }, []);
 
   const handleRename = async (fileName: string, newName: string) => {
-    renameFile(fileName, newName);
+    renameFile(fileName, newName); // await ??
     window.location.reload();
   };
 
   const handleDelete = async (fileName: string) => {
     console.log("Пробуем удалить файл");
-    deleteFile(fileName);
+    deleteFile(fileName); // await ??
     console.log("Файл удален");
     window.location.reload();
   };

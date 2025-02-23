@@ -18,6 +18,7 @@ export const addFile = async (file: File | null) => {
         Authorization: `Bearer ${token}`,
       },
     });
+    // you can use response to show a message to the user or to update the file list
     console.log("Файл отправлен");
   } catch (error) {
     console.error("Ошибка загрузки файла:", error);
@@ -55,7 +56,7 @@ export const redactFileFavOption = async ({
     const token = localStorage.getItem("token");
     console.log(token);
     await api.patch(
-      "/files/setFav",
+      "/files/setFav", // routing is spelled with "-" for example set-fav
       {
         filename,
         favOption,
@@ -133,6 +134,7 @@ export const renameFile = async (filename: string, newName: string) => {
         },
       }
     );
+    // use response to show a message to the user or to update the file list
   } catch (error) {
     console.error("Не удалось переименовать файл:", error);
   }
@@ -151,6 +153,7 @@ export const deleteFile = async (filename: string) => {
         },
       }
     );
+    // use response to show a message to the user or to update the file list
   } catch (error) {
     console.error("Не удалось удалить файл", error);
   }
