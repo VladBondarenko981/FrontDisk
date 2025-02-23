@@ -27,7 +27,7 @@ const TableRow: React.FC<TableRowProps> = ({
   const [newName, setNewName] = useState<string>(name);
 
   const handleOpen = () => {
-    if (!isEditing) openFile(filename);
+    if (!isEditing) openFile(filename); // await ??
   };
 
   const handleRename = () => {
@@ -38,7 +38,7 @@ const TableRow: React.FC<TableRowProps> = ({
   const handleBlur = () => {
     setIsEditing(false);
     if (newName !== name) {
-      onRename(newName); // Сохраняем новое имя через callback
+      onRename(newName); // Сохраняем новое имя через callback // await ??
     }
   };
 
@@ -47,7 +47,7 @@ const TableRow: React.FC<TableRowProps> = ({
       e.preventDefault(); // Предотвращаем перенос строки
       setIsEditing(false);
       if (newName !== name) {
-        onRename(newName); // Сохраняем новое имя через callback
+        onRename(newName); // Сохраняем новое имя через callback // async functions always return a promise so need to be called with await
       }
     }
     if (e.key === "Escape") {

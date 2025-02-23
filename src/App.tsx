@@ -9,7 +9,8 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/mainFiles" element={<MyDisk />} />
+        <Route path="/mainFiles" element={<MyDisk />} /> /* page routing is
+        spelled with "-" for example main-files */
         <Route path="/favFiles" element={<FavoriteFiles />} />
         <Route path="/binFiles" element={<BinPage />} />
         <Route path="" element={<MyDisk />} />

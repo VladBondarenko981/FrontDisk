@@ -15,7 +15,7 @@ const ModalLogWithReg: React.FC<ModalLogWithRegProps> = ({
   onLogOut,
 }) => {
   const token = localStorage.getItem("token");
-  return token == "" ? (
+  return token == "" ? ( // use "===" instead of "==" to avoid type coercion
     <div
       className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center"
       onClick={onClose}
