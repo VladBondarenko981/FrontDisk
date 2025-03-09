@@ -10,7 +10,7 @@ interface TableRowProps {
   size: number;
   favFile: boolean;
   filename: string;
-  onRename: (newName: string) => void; // Callback для сохранения нового имени
+  onRename: (newName: string) => void;
   onDelete: () => void;
 }
 
@@ -26,34 +26,33 @@ const TableRow: React.FC<TableRowProps> = ({
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [newName, setNewName] = useState<string>(name);
 
-  const handleOpen = () => {
-    if (!isEditing) openFile(filename);
+  const handleOpen = async () => {
+    if (!isEditing) await openFile(filename);
   };
 
   const handleRename = () => {
     setIsEditing(true);
-    console.log(isEditing, " Пробуем переименовать файл");
   };
 
-  const handleBlur = () => {
+  const handleBlur = async () => {
     setIsEditing(false);
     if (newName !== name) {
-      onRename(newName); // Сохраняем новое имя через callback
+      await onRename(newName);
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLSpanElement>) => {
+  const handleKeyDown = async (e: React.KeyboardEvent<HTMLSpanElement>) => {
     if (e.key === "Enter") {
-      e.preventDefault(); // Предотвращаем перенос строки
+      e.preventDefault();
       setIsEditing(false);
       if (newName !== name) {
-        onRename(newName); // Сохраняем новое имя через callback
+        await onRename(newName);
       }
     }
     if (e.key === "Escape") {
-      e.preventDefault(); // Предотвращаем дальнейшее действие
+      e.preventDefault();
       setIsEditing(false);
-      setNewName(name); // Отменяем изменения
+      setNewName(name);
     }
   };
 
@@ -85,26 +84,26 @@ const TableRow: React.FC<TableRowProps> = ({
           <TableActionFavIcon
             src="http://surl.li/xyoabd"
             alt="favorite"
-            tooltip="Добавить в избранное"
+            tooltip="Add to favorites"
             favFile={favFile}
             filename={filename}
           />
           <TableActionDownloadIcon
             src="http://surl.li/jpxuua"
             alt="download"
-            tooltip="Скачать"
+            tooltip="Download"
             filename={filename}
           />
           <TableActionIcon
             src="http://surl.li/dkhprx"
             alt="rename"
-            tooltip="Переименовать"
+            tooltip="Rename"
             onClick={handleRename}
           />
           <TableActionIcon
             src="https://goo.su/YjHa"
             alt="delete"
-            tooltip="Добавить в корзину"
+            tooltip="Add to cart"
             onClick={handleDelete}
           />
         </div>

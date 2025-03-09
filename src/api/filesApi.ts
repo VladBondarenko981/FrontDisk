@@ -11,23 +11,22 @@ export const addFile = async (file: File | null) => {
   formData.append("file", file);
   try {
     const token = localStorage.getItem("token");
-    console.log(token);
+
     await api.post("/files/addFile", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("Файл отправлен");
   } catch (error) {
-    console.error("Ошибка загрузки файла:", error);
+    console.error("File upload error:", error);
   }
 };
 
 export const getFiles = async () => {
   const token = localStorage.getItem("token");
   if (!token) {
-    console.error("Токен отсутствует");
+    console.error("No token");
     return [];
   }
   try {
@@ -36,11 +35,11 @@ export const getFiles = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("Файлы успешно получены");
+
     return response.data || [];
   } catch (error) {
     console.error(
-      "Ошибка получения файлов:",
+      "Error receiving files:",
       error.response?.data || error.message
     );
     return null;
@@ -53,7 +52,7 @@ export const redactFileFavOption = async ({
 }: FavOption) => {
   try {
     const token = localStorage.getItem("token");
-    console.log(token);
+
     await api.patch(
       "/files/setFav",
       {
@@ -67,43 +66,39 @@ export const redactFileFavOption = async ({
         },
       }
     );
-    console.log("Файл теперь избранный", filename);
   } catch (error) {
-    console.error("Ошибка загрузки файла:", error);
+    console.error("File upload error:", error);
   }
 };
 
 export const downloadFile = async (filename: string): Promise<void> => {
   try {
     const token = localStorage.getItem("token");
-    console.log("URL для загрузки:", `/files/download/${filename}`);
+
     const response = await api.get(`/files/download/${filename}`, {
-      responseType: "blob", // Указываем blob для корректного скачивания файла
+      responseType: "blob",
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
 
-    // Создаём ссылку для скачивания
     const url = window.URL.createObjectURL(new Blob([response.data]));
     const link = document.createElement("a");
     link.href = url;
-    link.setAttribute("download", filename); // Указываем имя файла
+    link.setAttribute("download", filename);
     document.body.appendChild(link);
     link.click();
 
-    // Убираем ссылку из DOM
     link.parentNode?.removeChild(link);
     window.URL.revokeObjectURL(url);
   } catch (error) {
-    console.error("Ошибка при скачивании файла:", error);
+    console.error("Error downloading file:", error);
   }
 };
 
 export const openFile = async (filename: string): Promise<void> => {
   try {
     const token = localStorage.getItem("token");
-    console.log("URL для загрузки:", `/files/download/${filename}?action=open`);
     const response = await api.get(`/files/download/${filename}?action=open`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -111,12 +106,11 @@ export const openFile = async (filename: string): Promise<void> => {
       responseType: "blob",
     });
 
-    // Создаём ссылку для скачивания
     const url = window.URL.createObjectURL(response.data);
-    window.open(url, "_blank"); // Открыть файл в новой вкладке
+    window.open(url, "_blank");
     window.URL.revokeObjectURL(url);
   } catch (error) {
-    console.error("Ошибка при скачивании файла:", error);
+    console.error("Error downloading file:", error);
   }
 };
 
@@ -134,7 +128,7 @@ export const renameFile = async (filename: string, newName: string) => {
       }
     );
   } catch (error) {
-    console.error("Не удалось переименовать файл:", error);
+    console.error("Failed to rename file:", error);
   }
 };
 
@@ -152,6 +146,6 @@ export const deleteFile = async (filename: string) => {
       }
     );
   } catch (error) {
-    console.error("Не удалось удалить файл", error);
+    console.error("Failed to delete file", error);
   }
 };

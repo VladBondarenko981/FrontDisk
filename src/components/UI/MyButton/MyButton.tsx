@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 
 interface MyButtonProps {
   children: React.ReactNode;

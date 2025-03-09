@@ -15,7 +15,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
   const [isModalRegOpen, setIsModalRegOpen] = useState(false);
 
   const handleOpenModal = () => {
-    setIsModalOpen(true); // Открываем модальное окно
+    setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
@@ -42,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
     window.location.reload();
   };
   return (
-    <header className="bg-slate-400 px-20 py-4 flex flex-row justify-between items-center hover:bg-slate-300">
+    <header className="bg-gradient-to-r from-blue-300 to-indigo-700 p-4 flex items-center justify-between shadow-lg">
       <MyLogo />
       <SearchBar onSearch={onSearch} />
       <div>

@@ -15,7 +15,7 @@ const ModalReg: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       return emailRegex.test(email);
     };
     if (!isValidEmail(email)) {
-      setMessage("Ваш email не соответствует формату");
+      setMessage("Your email is not in the correct format.");
       setMessageType("error");
       return;
     }
@@ -25,11 +25,10 @@ const ModalReg: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       window.location.reload();
     } catch (error) {
       if (error.response) {
-        console.log("Ошибка регистрации: ", error.response.data.message);
         setMessage(error.response.data.message);
         setMessageType("error");
       } else {
-        setMessage("Не удалось связаться с сервером.");
+        setMessage("Failed to contact the server.");
         setMessageType("error");
       }
     }
@@ -41,10 +40,10 @@ const ModalReg: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       onClick={onClose}
     >
       <div
-        className="bg-slate-600 p-10 rounded-lg w-[600px] text-center flex flex-col gap-5 items-center"
+        className="bg-gradient-to-r from-blue-300 to-indigo-700 p-10 rounded-lg w-[600px] text-center flex flex-col gap-5 items-center"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="font-bold text-3xl font-serif">Зарегистрироваться</h2>
+        <h2 className="font-bold text-3xl font-serif">Register</h2>
         <div className="flex flex-col gap-5">
           <label className="font-bold text-2xl font-serif">Email:</label>
           <MyInput
@@ -59,7 +58,7 @@ const ModalReg: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <ButtonWithFunc onClick={registr}>Register</ButtonWithFunc>
-          {messageType == "error" ? message : ""}
+          {messageType === "error" ? message : ""}
         </div>
       </div>
     </div>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ButtonWithFunc from "../UI/ButtonWithFunc/ButtonWithFunc.tsx";
 import { useNavigate } from "react-router-dom";
-import MyButton from "../UI/MyButton/MyButton.tsx";
 import FileUpload from "../FileUpload/FileUpload.tsx";
 
 const Aside = () => {
@@ -16,18 +15,16 @@ const Aside = () => {
     setIsUploading(false);
   };
   return (
-    <aside className="flex flex-col hover:bg-slate-300 bg-slate-400 w-1/s6 p-5 h-screen items-center justify-start gap-10 pt-[100px]">
-      <ButtonWithFunc onClick={handleFileUpload}>
-        Добавить файл +
+    <aside className="flex flex-col bg-gradient-to-r from-blue-300 to-indigo-700 w-1/s6 p-5 h-screen items-center justify-start gap-10 pt-[100px]">
+      <ButtonWithFunc onClick={handleFileUpload}>Add file +</ButtonWithFunc>
+      <ButtonWithFunc onClick={() => navigate("/main-files")}>
+        My Disk
       </ButtonWithFunc>
-      <ButtonWithFunc onClick={() => navigate("/mainFiles")}>
-        Мой Диск
+      <ButtonWithFunc onClick={() => navigate("/fav-files")}>
+        Favorites
       </ButtonWithFunc>
-      <ButtonWithFunc onClick={() => navigate("/favFiles")}>
-        Избранное
-      </ButtonWithFunc>
-      <ButtonWithFunc onClick={() => navigate("/binFiles")}>
-        Корзина
+      <ButtonWithFunc onClick={() => navigate("/bin-files")}>
+        Basket
       </ButtonWithFunc>
       {isUploading && (
         <FileUpload

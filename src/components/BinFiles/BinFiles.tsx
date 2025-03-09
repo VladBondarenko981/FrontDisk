@@ -13,7 +13,6 @@ const BinFiles: React.FC<BinFilesProps> = ({ searchTerm }) => {
     const fetchFiles = async () => {
       const filesData = await getFiles();
       setFiles(filesData);
-      console.log(filesData);
     };
 
     fetchFiles();
@@ -25,9 +24,7 @@ const BinFiles: React.FC<BinFilesProps> = ({ searchTerm }) => {
   };
 
   const handleDelete = async (fileName: string) => {
-    console.log("Пробуем удалить файл");
     deleteFile(fileName);
-    console.log("Файл удален");
     window.location.reload();
   };
 
@@ -37,10 +34,10 @@ const BinFiles: React.FC<BinFilesProps> = ({ searchTerm }) => {
     <table className="w-screen table-auto">
       <thead>
         <tr className="bg-gray-100 border-b">
-          <th className="px-4 py-2 text-left">Название</th>
-          <th className="px-4 py-2 text-left">Тип файла</th>
-          <th className="px-4 py-2 text-left">Размер</th>
-          <th className="px-4 py-2 text-right">Действия</th>
+          <th className="px-4 py-2 text-left">Name</th>
+          <th className="px-4 py-2 text-left">File type</th>
+          <th className="px-4 py-2 text-left">Size</th>
+          <th className="px-4 py-2 text-right">Actions</th>
         </tr>
       </thead>
       <tbody>
