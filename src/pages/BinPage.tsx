@@ -18,9 +18,8 @@ const BinPage = () => {
         {token ? (
           <BinFiles searchTerm={searchTerm} />
         ) : (
-          <div className="flex items-center justify-center font-bold w-screen font-serif text-xl">
-            Что бы увидеть ваши файлы, то вам нужно Зарегистрироваться или Войти
-            в свой аккаунт
+          <div className="flex items-center justify-center font-bold w-screen font-serif text-xl border-grey border-4">
+            To see your files, you need to Register or Login to your account
           </div>
         )}
       </div>

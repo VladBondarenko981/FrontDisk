@@ -7,7 +7,6 @@ const MyDisk = () => {
   const token = localStorage.getItem("token");
   const [searchTerm, setSearchTerm] = useState("");
   const handleSearch = (searchItem: string) => {
-    console.log("Searching for:", searchItem); // Для отладки
     setSearchTerm(searchItem);
   };
   return (
@@ -19,8 +18,7 @@ const MyDisk = () => {
           <TableFiles searchTerm={searchTerm} />
         ) : (
           <div className="flex items-center justify-center font-bold w-screen font-serif text-xl">
-            Что бы увидеть ваши файлы, то вам нужно Зарегистрироваться или Войти
-            в свой аккаунт
+            To see your files, you need to Register or Login to your account
           </div>
         )}
       </div>

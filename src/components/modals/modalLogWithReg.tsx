@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ButtonWithFunc from "../UI/ButtonWithFunc/ButtonWithFunc.tsx";
 
 interface ModalLogWithRegProps {
@@ -15,21 +15,21 @@ const ModalLogWithReg: React.FC<ModalLogWithRegProps> = ({
   onLogOut,
 }) => {
   const token = localStorage.getItem("token");
-  return token == "" ? (
+  return token === "" ? (
     <div
       className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center"
       onClick={onClose}
     >
       <div
-        className="bg-slate-600 p-10 rounded-lg w-[600px] text-center flex flex-col gap-5 items-center"
+        className="bg-gradient-to-r from-blue-300 to-indigo-700 p-10 rounded-lg w-[600px] text-center flex flex-col gap-5 items-center"
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="font-bold text-3xl font-serif">
-          Создайте свой профиль или войдите уже в существующий
+          Create your profile or log in to an existing one
         </h2>
         <div className="flex flex-row gap-5">
-          <ButtonWithFunc onClick={onOpenLogModal}>Войти</ButtonWithFunc>
-          <ButtonWithFunc onClick={onOpenRegModal}>Регистрация</ButtonWithFunc>
+          <ButtonWithFunc onClick={onOpenLogModal}>Login</ButtonWithFunc>
+          <ButtonWithFunc onClick={onOpenRegModal}>Registration</ButtonWithFunc>
         </div>
       </div>
     </div>
@@ -43,10 +43,10 @@ const ModalLogWithReg: React.FC<ModalLogWithRegProps> = ({
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="font-bold text-3xl font-serif">
-          Желаете выйти из аккаунта?
+          Do you want to log out of your account?
         </h2>
         <div className="flex flex-row gap-5">
-          <ButtonWithFunc onClick={onLogOut}>Выйти</ButtonWithFunc>
+          <ButtonWithFunc onClick={onLogOut}>Log out</ButtonWithFunc>
         </div>
       </div>
     </div>

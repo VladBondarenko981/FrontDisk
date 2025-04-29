@@ -1,5 +1,4 @@
 import React from "react";
-import MyButton from "../UI/MyButton/MyButton.tsx";
 import MyInput from "../UI/MyInput/MyInput.tsx";
 
 interface SearchBarProps {

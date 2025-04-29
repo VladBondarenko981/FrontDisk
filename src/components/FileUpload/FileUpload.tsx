@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import ButtonWithFunc from "../UI/ButtonWithFunc/ButtonWithFunc.tsx";
 import { addFile } from "../../api/filesApi.ts";
 
@@ -19,19 +18,20 @@ const FileUpload = ({
   };
 
   const handleUpload = async () => {
-    addFile(file);
-    onFileUploaded();
-    setFile(null);
-    setIsUploading(false);
-    window.location.reload();
+    if (file) {
+      addFile(file);
+      onFileUploaded();
+      setFile(null);
+      setIsUploading(false);
+    }
   };
 
   return (
-    <div className="upload-modal flex flex-col justify-center gap-4 border-2 border-transparent rounded-full p-4 bg-yellow-500 text-white font-semibold hover:bg-blue-600 hover:border-blue-500 transition-all duration-200 shadow-lg active:scale-95 pt-10">
+    <div className="upload-modal flex flex-col items-center justify-center gap-4 p-6 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-lg shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105">
       <input
         type="file"
         onChange={handleFileChange}
-        className="border-2 h-[50px] w-[170px] border-gray-300 rounded-xl p-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-black bg-gray-50 shadow-md hover:bg-gray-100 transition-all duration-200 text-center"
+        className="file-input mb-4 w-[300px] p-4 border-2 border-gray-300 rounded-lg bg-white text-gray-700 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
       />
       <ButtonWithFunc onClick={handleUpload}>Загрузить</ButtonWithFunc>
     </div>

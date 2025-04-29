@@ -1,5 +1,4 @@
 import React from "react";
-import { handleLogin } from "../../api/authApi.ts";
 import { redactFileFavOption } from "../../api/filesApi.ts";
 
 interface TableActionIconProps {

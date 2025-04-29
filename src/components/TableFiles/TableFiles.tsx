@@ -1,6 +1,5 @@
-import React, { act, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import TableRow from "./TableRow.tsx";
-import axios from "axios";
 import { deleteFile, getFiles, renameFile } from "../../api/filesApi.ts";
 import { File } from "../../interfaces/Interfaces.tsx";
 import io from "socket.io-client";
@@ -17,7 +16,6 @@ const TableFiles: React.FC<TableFilesProps> = ({ searchTerm }) => {
     const fetchFiles = async () => {
       const filesData = await getFiles();
       setFiles(filesData || []);
-      console.log(filesData);
     };
     fetchFiles();
     socket.on("filesUpdated", (updatedFile) => {
@@ -36,9 +34,9 @@ const TableFiles: React.FC<TableFilesProps> = ({ searchTerm }) => {
       }
     });
     return () => {
-      socket.off("filesUpdated"); // Очистка при размонтировании компонента
+      socket.off("filesUpdated");
     };
-  }, []);
+  }, [socket]);
 
   const handleRename = async (fileName: string, newName: string) => {
     await renameFile(fileName, newName);
@@ -47,7 +45,7 @@ const TableFiles: React.FC<TableFilesProps> = ({ searchTerm }) => {
 
   const handleDelete = async (fileName: string) => {
     await deleteFile(fileName);
-    socket.emit("fileUpdate", { fileName, action: "deleted" }); // Отправляем обновление на сервер
+    socket.emit("fileUpdate", { fileName, action: "deleted" });
   };
 
   const filteredFiles = files
@@ -66,10 +64,10 @@ const TableFiles: React.FC<TableFilesProps> = ({ searchTerm }) => {
     <table className="w-screen table-auto">
       <thead>
         <tr className="bg-gray-100 border-b">
-          <th className="px-4 py-2 text-left">Название</th>
-          <th className="px-4 py-2 text-left">Тип файла</th>
-          <th className="px-4 py-2 text-left">Размер</th>
-          <th className="px-4 py-2 text-right">Действия</th>
+          <th className="px-4 py-2 text-left">Name</th>
+          <th className="px-4 py-2 text-left">File type</th>
+          <th className="px-4 py-2 text-left">Size</th>
+          <th className="px-4 py-2 text-right">Actions</th>
         </tr>
       </thead>
       <tbody>
